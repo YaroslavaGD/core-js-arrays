@@ -461,8 +461,10 @@ function getIndicesOfOddNumbers(numbers) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map(
+    (element) => `#${element.toString(16).padStart(6, '0').toUpperCase()}`
+  );
 }
 
 /**
@@ -513,8 +515,19 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => longest is [3, 10] and [1, 20] => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => longest is [7, 40, 80] => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  let maxLen = 0;
+  const lastSubseq = nums.reduce((currentSubseq, num) => {
+    const prev = currentSubseq[currentSubseq.length - 1];
+
+    if (currentSubseq.length > 0 && num <= prev) {
+      maxLen = Math.max(maxLen, currentSubseq.length);
+      return [num];
+    }
+    return [...currentSubseq, num];
+  }, []);
+
+  return Math.max(maxLen, lastSubseq.length);
 }
 
 /**
@@ -531,8 +544,8 @@ function findLongestIncreasingSubsequence(/* nums */) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.flatMap((element, index) => Array(index + 1).fill(element));
 }
 
 /**
